@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Free JSON Formatter & Validator Online | ToolsFlash</title>
+<meta name="description" content="Format, validate, and minify JSON instantly. Free online JSON formatter with syntax highlighting and error detection. No signup required.">
+<meta name="keywords" content="json formatter, json validator, json beautifier, format json online, json minifier, free json tool">
+<link rel="canonical" href="https://toolsflash.vercel.app/tools/json-formatter.html">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f8f9fa;color:#212529}
+header{background:#fff;border-bottom:1px solid #e9ecef;padding:1rem 0}
+.container{max-width:1000px;margin:0 auto;padding:0 1.5rem}
+nav{display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:1.3rem;font-weight:700;color:#2563eb;text-decoration:none}
+.logo span{color:#212529}
+.back{color:#6c757d;text-decoration:none;font-size:.9rem}
+.hero{background:#fff;border-bottom:1px solid #e9ecef;padding:2rem 0}
+.hero h1{font-size:1.9rem;font-weight:700;margin-bottom:.5rem}
+.hero p{color:#6c757d}
+.tool-area{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:2rem 0}
+.panel{background:#fff;border:1px solid #e9ecef;border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+.panel-header{padding:.75rem 1rem;border-bottom:1px solid #e9ecef;background:#f8f9fa;display:flex;align-items:center;justify-content:space-between;font-size:.9rem;font-weight:500}
+.panel-actions{display:flex;gap:.5rem}
+.btn{padding:.35rem .75rem;border-radius:6px;border:1px solid #dee2e6;cursor:pointer;font-size:.8rem;background:#fff;color:#495057;transition:background .15s}
+.btn:hover{background:#e9ecef}
+.btn-primary{background:#2563eb;color:#fff;border-color:#2563eb}
+.btn-primary:hover{background:#1d4ed8}
+textarea{flex:1;min-height:350px;padding:1rem;font-size:.88rem;border:none;outline:none;resize:none;font-family:'Courier New',monospace;line-height:1.6}
+.output-panel{flex:1;overflow:auto;min-height:350px;padding:1rem;font-family:'Courier New',monospace;font-size:.85rem;line-height:1.7;white-space:pre;background:#fff}
+.toolbar{display:flex;gap:.75rem;margin-bottom:1rem;flex-wrap:wrap}
+.status{padding:.6rem 1rem;border-radius:8px;font-size:.88rem;margin-bottom:1rem;display:none}
+.status.success{background:#f0fdf4;color:#166534;border:1px solid #bbf7d0;display:block}
+.status.error{background:#fef2f2;color:#dc2626;border:1px solid #fecaca;display:block}
+.ad-banner{background:#f8f9fa;border:1px solid #e9ecef;border-radius:8px;padding:1rem;text-align:center;color:#6c757d;font-size:.85rem;min-height:90px;display:flex;align-items:center;justify-content:center;margin:1rem 0}
+.key{color:#b45309}.str{color:#1d4ed8}.num{color:#7c3aed}.bool{color:#db2777}.null{color:#6b7280}
+footer{background:#212529;color:#adb5bd;padding:1.5rem 0;text-align:center;font-size:.85rem;margin-top:2rem}
+@media(max-width:700px){.tool-area{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+<div class="container">
+<nav>
+<a href="../index.html" class="logo">Tools<span>Flash</span></a>
+<a href="../index.html" class="back">← All Tools</a>
+</nav>
+</div>
+</header>
+<div class="hero">
+<div class="container">
+<h1>{ } JSON Formatter</h1>
+<p>Format, validate, and minify JSON — syntax highlighting, error detection</p>
+</div>
+</div>
+<div class="container">
+<div class="ad-banner"><!-- ADSENSE_TOP --><span>Advertisement</span></div>
+
+<div class="toolbar">
+<button class="btn btn-primary" onclick="format()">⚡ Format / Beautify</button>
+<button class="btn" onclick="minify()">Minify</button>
+<button class="btn" onclick="validate()">Validate</button>
+<button class="btn" onclick="clear()">Clear</button>
+<button class="btn" onclick="loadSample()">Load Sample</button>
+</div>
+
+<div id="status" class="status"></div>
+
+<div class="tool-area">
+<div class="panel">
+<div class="panel-header">
+Input JSON
+<div class="panel-actions">
+<button class="btn" onclick="pasteClip()">Paste</button>
+</div>
+</div>
+<textarea id="input" placeholder='Paste your JSON here...
+{"name":"John","age":30}'></textarea>
+</div>
+<div class="panel">
+<div class="panel-header">
+Formatted Output
+<div class="panel-actions">
+<button class="btn" onclick="copyOutput()">Copy</button>
+</div>
+</div>
+<div id="output" class="output-panel" style="color:#6c757d">Formatted JSON will appear here</div>
+</div>
+</div>
+
+<div class="ad-banner"><!-- ADSENSE_BOT --><span>Advertisement</span></div>
+</div>
+<footer>© 2025 ToolsFlash — Free Online Tools</footer>
+<script>
+function format(){
+const v=document.getElementById('input').value.trim();
+if(!v){showStatus('error','Please paste some JSON first.');return;}
+try{
+const obj=JSON.parse(v);
+const pretty=JSON.stringify(obj,null,2);
+document.getElementById('output').innerHTML=highlight(pretty);
+showStatus('success','✓ Valid JSON — formatted successfully.');
+}catch(e){showStatus('error','Invalid JSON: '+e.message);}
+}
+function minify(){
+const v=document.getElementById('input').value.trim();
+if(!v)return;
+try{
+const obj=JSON.parse(v);
+document.getElementById('output').textContent=JSON.stringify(obj);
+showStatus('success','✓ Minified successfully.');
+}catch(e){showStatus('error','Invalid JSON: '+e.message);}
+}
+function validate(){
+const v=document.getElementById('input').value.trim();
+if(!v){showStatus('error','No input.');return;}
+try{JSON.parse(v);showStatus('success','✓ Valid JSON!');}
+catch(e){showStatus('error','Invalid JSON: '+e.message);}
+}
+function highlight(s){
+return s.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g,m=>{
+let cls='num';
+if(/^"/.test(m)){if(/:$/.test(m)){cls='key';}else{cls='str';}}
+else if(/true|false/.test(m)){cls='bool';}
+else if(/null/.test(m)){cls='null';}
+return`<span class="${cls}">${m}</span>`;
+});
+}
+function clear(){document.getElementById('input').value='';document.getElementById('output').innerHTML='<span style="color:#6c757d">Formatted JSON will appear here</span>';document.getElementById('status').style.display='none';}
+function copyOutput(){const t=document.getElementById('output').textContent;navigator.clipboard.writeText(t);}
+function pasteClip(){navigator.clipboard.readText().then(t=>document.getElementById('input').value=t);}
+function loadSample(){
+document.getElementById('input').value='{"name":"John Doe","age":30,"email":"john@example.com","address":{"street":"123 Main St","city":"New York","zip":"10001"},"hobbies":["reading","coding","hiking"],"active":true}';
+format();
+}
+function showStatus(type,msg){
+const el=document.getElementById('status');
+el.className='status '+type;el.textContent=msg;el.style.display='block';
+}
+</script>
+</body>
+</html>

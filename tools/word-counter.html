@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Word Counter - Count Words, Characters, Sentences Online | ToolsFlash</title>
+<meta name="description" content="Free online word counter. Count words, characters, sentences, paragraphs and estimate reading time. Paste any text and see stats instantly.">
+<meta name="keywords" content="word counter, character counter, word count tool, count words online, free word counter">
+<link rel="canonical" href="https://toolsflash.vercel.app/tools/word-counter.html">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f8f9fa;color:#212529}
+header{background:#fff;border-bottom:1px solid #e9ecef;padding:1rem 0}
+.container{max-width:900px;margin:0 auto;padding:0 1.5rem}
+nav{display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:1.3rem;font-weight:700;color:#2563eb;text-decoration:none}
+.logo span{color:#212529}
+.back{color:#6c757d;text-decoration:none;font-size:.9rem}
+.hero{background:#fff;border-bottom:1px solid #e9ecef;padding:2rem 0}
+.hero h1{font-size:1.9rem;font-weight:700;margin-bottom:.5rem}
+.hero p{color:#6c757d}
+.stats-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1rem;margin:2rem 0}
+.stat-card{background:#fff;border:1px solid #e9ecef;border-radius:10px;padding:1.25rem;text-align:center}
+.stat-n{font-size:2rem;font-weight:700;color:#2563eb}
+.stat-l{font-size:.8rem;color:#6c757d;margin-top:.25rem}
+.editor-area{background:#fff;border:1px solid #e9ecef;border-radius:12px;overflow:hidden;margin-bottom:1.5rem}
+.editor-toolbar{padding:.75rem 1rem;border-bottom:1px solid #e9ecef;display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.btn{padding:.45rem .85rem;border-radius:6px;border:1px solid #dee2e6;cursor:pointer;font-size:.85rem;background:#fff;color:#495057}
+.btn:hover{background:#f8f9fa}
+.btn-danger{background:#fef2f2;color:#dc2626;border-color:#fecaca}
+textarea{width:100%;min-height:300px;padding:1.25rem;font-size:1rem;border:none;outline:none;resize:vertical;line-height:1.7;font-family:inherit}
+.keyword-section{background:#fff;border:1px solid #e9ecef;border-radius:12px;padding:1.5rem;margin-bottom:1.5rem}
+.keyword-section h3{margin-bottom:1rem;font-size:1.05rem}
+#keyword-table td{padding:.4rem .75rem;font-size:.9rem;border-bottom:1px solid #f8f9fa}
+#keyword-table th{padding:.5rem .75rem;font-size:.8rem;color:#6c757d;text-align:left;border-bottom:1px solid #e9ecef}
+.ad-banner{background:#f8f9fa;border:1px solid #e9ecef;border-radius:8px;padding:1rem;text-align:center;color:#6c757d;font-size:.85rem;min-height:100px;display:flex;align-items:center;justify-content:center;margin:1.5rem 0}
+.reading-level{background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:1rem;margin-bottom:1.5rem;font-size:.9rem}
+footer{background:#212529;color:#adb5bd;padding:1.5rem 0;text-align:center;font-size:.85rem;margin-top:2rem}
+@media(max-width:600px){.stats-grid{grid-template-columns:repeat(3,1fr)}}
+</style>
+</head>
+<body>
+<header>
+<div class="container">
+<nav>
+<a href="../index.html" class="logo">Tools<span>Flash</span></a>
+<a href="../index.html" class="back">← All Tools</a>
+</nav>
+</div>
+</header>
+<div class="hero">
+<div class="container">
+<h1>📝 Word Counter</h1>
+<p>Paste your text — words, characters, sentences, and reading time appear instantly</p>
+</div>
+</div>
+
+<div class="container">
+<div class="ad-banner"><!-- ADSENSE_UNIT_TOP --><span>Advertisement</span></div>
+
+<div class="stats-grid">
+<div class="stat-card"><div class="stat-n" id="words">0</div><div class="stat-l">Words</div></div>
+<div class="stat-card"><div class="stat-n" id="chars">0</div><div class="stat-l">Characters</div></div>
+<div class="stat-card"><div class="stat-n" id="chars-no-space">0</div><div class="stat-l">No Spaces</div></div>
+<div class="stat-card"><div class="stat-n" id="sentences">0</div><div class="stat-l">Sentences</div></div>
+<div class="stat-card"><div class="stat-n" id="read-time">0m</div><div class="stat-l">Read Time</div></div>
+</div>
+
+<div class="editor-area">
+<div class="editor-toolbar">
+<button class="btn" onclick="document.getElementById('txt').select()">Select All</button>
+<button class="btn" onclick="copyText()">Copy</button>
+<button class="btn btn-danger" onclick="document.getElementById('txt').value='';count()">Clear</button>
+<span style="margin-left:auto;font-size:.85rem;color:#6c757d" id="para-count">0 paragraphs</span>
+</div>
+<textarea id="txt" placeholder="Paste or type your text here..." oninput="count()"></textarea>
+</div>
+
+<div class="reading-level" id="reading-level" style="display:none">
+📖 <strong id="rl-label">Reading level</strong> — <span id="rl-desc"></span>
+</div>
+
+<div class="keyword-section">
+<h3>Top Keywords</h3>
+<table id="keyword-table" style="width:100%;border-collapse:collapse">
+<thead><tr><th>Word</th><th>Count</th><th>Density</th></tr></thead>
+<tbody id="kw-body"><tr><td colspan="3" style="color:#adb5bd;padding:.75rem;text-align:center">Type or paste text above</td></tr></tbody>
+</table>
+</div>
+
+<div class="ad-banner"><!-- ADSENSE_UNIT_BOT --><span>Advertisement</span></div>
+</div>
+<footer>© 2025 ToolsFlash — Free Online Tools</footer>
+
+<script>
+function count(){
+const txt=document.getElementById('txt').value;
+const words=txt.trim()===''?0:txt.trim().split(/\s+/).filter(w=>w.length>0).length;
+const chars=txt.length;
+const charsNoSpace=txt.replace(/\s/g,'').length;
+const sentences=txt.split(/[.!?]+/).filter(s=>s.trim().length>0).length;
+const paras=txt.split(/\n\s*\n/).filter(p=>p.trim().length>0).length;
+const readTime=Math.max(1,Math.round(words/200));
+document.getElementById('words').textContent=words.toLocaleString();
+document.getElementById('chars').textContent=chars.toLocaleString();
+document.getElementById('chars-no-space').textContent=charsNoSpace.toLocaleString();
+document.getElementById('sentences').textContent=sentences.toLocaleString();
+document.getElementById('read-time').textContent=readTime+'m';
+document.getElementById('para-count').textContent=paras+' paragraph'+(paras!==1?'s':'');
+updateKeywords(txt,words);
+if(words>0){
+const rl=document.getElementById('reading-level');
+rl.style.display='block';
+const avgWordLen=words>0?charsNoSpace/words:0;
+let label='Easy',desc='Simple and clear writing, suitable for all ages.';
+if(avgWordLen>6){label='Advanced';desc='Academic or technical vocabulary. Suitable for expert readers.';}
+else if(avgWordLen>5){label='Intermediate';desc='Moderate complexity. Suitable for general adult audience.';}
+document.getElementById('rl-label').textContent=label;
+document.getElementById('rl-desc').textContent=desc;
+}
+}
+function updateKeywords(txt,totalWords){
+const words=txt.toLowerCase().replace(/[^a-z\s]/g,'').split(/\s+/).filter(w=>w.length>3);
+const stopwords=new Set(['this','that','with','have','will','from','they','been','were','their','there','what','when','which','your','more','about','these','those','than','then','into','some','would','could','should']);
+const freq={};
+words.forEach(w=>{if(!stopwords.has(w))freq[w]=(freq[w]||0)+1;});
+const sorted=Object.entries(freq).sort((a,b)=>b[1]-a[1]).slice(0,10);
+const tbody=document.getElementById('kw-body');
+if(sorted.length===0){tbody.innerHTML='<tr><td colspan="3" style="color:#adb5bd;padding:.75rem;text-align:center">No significant keywords found</td></tr>';return;}
+tbody.innerHTML=sorted.map(([w,c])=>`<tr><td><strong>${w}</strong></td><td>${c}</td><td>${totalWords>0?((c/totalWords)*100).toFixed(1)+'%':'0%'}</td></tr>`).join('');
+}
+function copyText(){navigator.clipboard.writeText(document.getElementById('txt').value);}
+</script>
+</body>
+</html>

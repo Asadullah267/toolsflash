@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Base64 Encoder Decoder Online Free | ToolsFlash</title>
+<meta name="description" content="Free online Base64 encoder and decoder. Encode text or files to Base64, decode Base64 strings back to text instantly.">
+<meta name="keywords" content="base64 encoder, base64 decoder, encode base64 online, decode base64, base64 converter free">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f8f9fa;color:#212529}
+header{background:#fff;border-bottom:1px solid #e9ecef;padding:1rem 0}.container{max-width:800px;margin:0 auto;padding:0 1.5rem}
+nav{display:flex;align-items:center;justify-content:space-between}.logo{font-size:1.3rem;font-weight:700;color:#2563eb;text-decoration:none}.logo span{color:#212529}
+.back{color:#6c757d;text-decoration:none;font-size:.9rem}.hero{background:#fff;border-bottom:1px solid #e9ecef;padding:2rem 0}
+.hero h1{font-size:1.9rem;font-weight:700;margin-bottom:.5rem}.hero p{color:#6c757d}
+.panel{background:#fff;border:1px solid #e9ecef;border-radius:12px;padding:1.5rem;margin:1.5rem 0}
+textarea{width:100%;min-height:150px;padding:1rem;font-family:monospace;font-size:.9rem;border:1px solid #dee2e6;border-radius:8px;outline:none;resize:vertical}
+.btn{padding:.65rem 1.25rem;border-radius:8px;border:none;cursor:pointer;font-size:.9rem;font-weight:500}
+.btn-primary{background:#2563eb;color:#fff;margin-right:.5rem}.btn-secondary{background:#f0f9ff;color:#0369a1;border:1px solid #bae6fd}
+.ad-banner{background:#f8f9fa;border:1px solid #e9ecef;border-radius:8px;padding:1rem;text-align:center;color:#6c757d;font-size:.85rem;min-height:90px;display:flex;align-items:center;justify-content:center;margin:1rem 0}
+footer{background:#212529;color:#adb5bd;padding:1.5rem 0;text-align:center;font-size:.85rem;margin-top:2rem}
+</style>
+</head>
+<body>
+<header><div class="container"><nav><a href="../index.html" class="logo">Tools<span>Flash</span></a><a href="../index.html" class="back">← All Tools</a></nav></div></header>
+<div class="hero"><div class="container"><h1>🔄 Base64 Encoder / Decoder</h1><p>Encode or decode Base64 strings — free, instant, no signup</p></div></div>
+<div class="container">
+<div class="ad-banner"><span>Advertisement</span></div>
+<div class="panel">
+<h3 style="margin-bottom:1rem">Text to Base64 (Encode)</h3>
+<textarea id="enc-in" placeholder="Enter text to encode..."></textarea>
+<div style="margin:.75rem 0"><button class="btn btn-primary" onclick="encode()">Encode to Base64</button><button class="btn btn-secondary" onclick="copyEl('enc-out')">Copy Result</button></div>
+<textarea id="enc-out" placeholder="Base64 output appears here..." readonly></textarea>
+</div>
+<div class="panel">
+<h3 style="margin-bottom:1rem">Base64 to Text (Decode)</h3>
+<textarea id="dec-in" placeholder="Paste Base64 string here..."></textarea>
+<div style="margin:.75rem 0"><button class="btn btn-primary" onclick="decode()">Decode from Base64</button><button class="btn btn-secondary" onclick="copyEl('dec-out')">Copy Result</button></div>
+<textarea id="dec-out" placeholder="Decoded text appears here..." readonly></textarea>
+</div>
+<div class="ad-banner"><span>Advertisement</span></div>
+</div>
+<footer>© 2025 ToolsFlash — Free Online Tools</footer>
+<script>
+function encode(){try{document.getElementById('enc-out').value=btoa(unescape(encodeURIComponent(document.getElementById('enc-in').value)));}catch(e){document.getElementById('enc-out').value='Error: '+e.message;}}
+function decode(){try{document.getElementById('dec-out').value=decodeURIComponent(escape(atob(document.getElementById('dec-in').value)));}catch(e){document.getElementById('dec-out').value='Invalid Base64: '+e.message;}}
+function copyEl(id){navigator.clipboard.writeText(document.getElementById(id).value);}
+</script>
+</body></html>

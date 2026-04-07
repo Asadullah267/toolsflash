@@ -1,0 +1,32 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Text Case Converter Online - UPPERCASE lowercase Title Case | ToolsFlash</title>
+<meta name="description" content="Convert text to UPPERCASE, lowercase, Title Case, camelCase, snake_case and more. Free online text case converter.">
+<meta name="keywords" content="text case converter, uppercase converter, lowercase converter, title case, camelcase converter online">
+<style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,sans-serif;background:#f8f9fa;color:#212529}header{background:#fff;border-bottom:1px solid #e9ecef;padding:1rem 0}.container{max-width:800px;margin:0 auto;padding:0 1.5rem}nav{display:flex;align-items:center;justify-content:space-between}.logo{font-size:1.3rem;font-weight:700;color:#2563eb;text-decoration:none}.logo span{color:#212529}.back{color:#6c757d;text-decoration:none;font-size:.9rem}.hero{background:#fff;border-bottom:1px solid #e9ecef;padding:2rem 0}.hero h1{font-size:1.9rem;font-weight:700;margin-bottom:.5rem}.hero p{color:#6c757d}.panel{background:#fff;border:1px solid #e9ecef;border-radius:12px;padding:1.5rem;margin:1.5rem 0}textarea{width:100%;min-height:150px;padding:1rem;font-size:1rem;border:1px solid #dee2e6;border-radius:8px;outline:none;resize:vertical}.btns{display:flex;flex-wrap:wrap;gap:.5rem;margin:1rem 0}.btn{padding:.55rem 1rem;border-radius:8px;border:1px solid #dee2e6;cursor:pointer;font-size:.85rem;background:#fff;color:#212529;font-weight:500;transition:all .15s}.btn:hover{background:#2563eb;color:#fff;border-color:#2563eb}.ad-banner{background:#f8f9fa;border:1px solid #e9ecef;border-radius:8px;padding:1rem;text-align:center;color:#6c757d;min-height:90px;display:flex;align-items:center;justify-content:center;margin:1rem 0}footer{background:#212529;color:#adb5bd;padding:1.5rem 0;text-align:center;font-size:.85rem;margin-top:2rem}</style>
+</head><body>
+<header><div class="container"><nav><a href="../index.html" class="logo">Tools<span>Flash</span></a><a href="../index.html" class="back">← All Tools</a></nav></div></header>
+<div class="hero"><div class="container"><h1>Aa Text Case Converter</h1><p>Convert text between UPPER, lower, Title, camelCase, snake_case and more</p></div></div>
+<div class="container">
+<div class="ad-banner"><span>Advertisement</span></div>
+<div class="panel">
+<label style="font-size:.9rem;color:#6c757d;margin-bottom:.5rem;display:block">Enter your text:</label>
+<textarea id="txt" placeholder="Type or paste text here..."></textarea>
+<div class="btns">
+<button class="btn" onclick="cv(t=>t.toUpperCase())">UPPERCASE</button>
+<button class="btn" onclick="cv(t=>t.toLowerCase())">lowercase</button>
+<button class="btn" onclick="cv(t=>t.replace(/\w\S*/g,w=>w[0].toUpperCase()+w.slice(1).toLowerCase()))">Title Case</button>
+<button class="btn" onclick="cv(t=>t[0].toUpperCase()+t.slice(1).toLowerCase())">Sentence case</button>
+<button class="btn" onclick="cv(t=>t.toLowerCase().replace(/\s+/g,'_'))">snake_case</button>
+<button class="btn" onclick="cv(t=>t.toLowerCase().replace(/\s+/g,'-'))">kebab-case</button>
+<button class="btn" onclick="cv(t=>t.replace(/(?:^\w|\s+\w)/g,(m,i)=>i===0?m.replace(/\s/,'').toLowerCase():m.replace(/\s/,'').toUpperCase()))">camelCase</button>
+<button class="btn" onclick="cv(t=>t.split('').map(c=>Math.random()>0.5?c.toUpperCase():c.toLowerCase()).join(''))">rAnDoM</button>
+</div>
+<label style="font-size:.9rem;color:#6c757d;margin-bottom:.5rem;display:block">Result:</label>
+<textarea id="out" readonly placeholder="Converted text appears here..."></textarea>
+<button onclick="navigator.clipboard.writeText(document.getElementById('out').value)" style="margin-top:.5rem;padding:.5rem 1rem;background:#2563eb;color:#fff;border:none;border-radius:6px;cursor:pointer">Copy Result</button>
+</div>
+<div class="ad-banner"><span>Advertisement</span></div>
+</div>
+<footer>© 2025 ToolsFlash</footer>
+<script>function cv(fn){const t=document.getElementById('txt').value;document.getElementById('out').value=fn(t);}</script>
+</body></html>

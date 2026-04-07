@@ -1,0 +1,39 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Lorem Ipsum Generator - Free Placeholder Text Online | ToolsFlash</title>
+<meta name="description" content="Free Lorem Ipsum generator. Generate placeholder text paragraphs, sentences or words for your designs and mockups instantly.">
+<style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,sans-serif;background:#f8f9fa;color:#212529}header{background:#fff;border-bottom:1px solid #e9ecef;padding:1rem 0}.container{max-width:800px;margin:0 auto;padding:0 1.5rem}nav{display:flex;align-items:center;justify-content:space-between}.logo{font-size:1.3rem;font-weight:700;color:#2563eb;text-decoration:none}.logo span{color:#212529}.back{color:#6c757d;text-decoration:none;font-size:.9rem}.hero{background:#fff;border-bottom:1px solid #e9ecef;padding:2rem 0}.hero h1{font-size:1.9rem;font-weight:700;margin-bottom:.5rem}.hero p{color:#6c757d}.panel{background:#fff;border:1px solid #e9ecef;border-radius:12px;padding:1.5rem;margin:1.5rem 0}.row{display:flex;gap:1rem;align-items:center;margin-bottom:1rem;flex-wrap:wrap}.row label{font-size:.95rem;font-weight:500}.row select,.row input{padding:.6rem;border:1px solid #dee2e6;border-radius:8px;font-size:.95rem}.btn{padding:.65rem 1.25rem;border-radius:8px;border:none;cursor:pointer;font-size:.9rem;font-weight:500;background:#2563eb;color:#fff}textarea{width:100%;min-height:300px;padding:1rem;font-size:.95rem;border:1px solid #dee2e6;border-radius:8px;outline:none;resize:vertical;line-height:1.8}.ad-banner{background:#f8f9fa;border:1px solid #e9ecef;border-radius:8px;padding:1rem;text-align:center;color:#6c757d;min-height:90px;display:flex;align-items:center;justify-content:center;margin:1rem 0}footer{background:#212529;color:#adb5bd;padding:1.5rem 0;text-align:center;font-size:.85rem;margin-top:2rem}</style>
+</head><body>
+<header><div class="container"><nav><a href="../index.html" class="logo">Tools<span>Flash</span></a><a href="../index.html" class="back">← All Tools</a></nav></div></header>
+<div class="hero"><div class="container"><h1>📄 Lorem Ipsum Generator</h1><p>Generate placeholder text for designs and mockups</p></div></div>
+<div class="container">
+<div class="ad-banner"><span>Advertisement</span></div>
+<div class="panel">
+<div class="row">
+<label>Type:</label>
+<select id="type"><option value="paragraphs">Paragraphs</option><option value="sentences">Sentences</option><option value="words">Words</option></select>
+<label>Count:</label>
+<input type="number" id="count" value="3" min="1" max="50">
+<button class="btn" onclick="gen()">Generate</button>
+<button onclick="navigator.clipboard.writeText(document.getElementById('out').value)" style="padding:.65rem 1.25rem;border-radius:8px;border:1px solid #dee2e6;cursor:pointer;background:#fff">Copy</button>
+</div>
+<textarea id="out" readonly></textarea>
+</div>
+<div class="ad-banner"><span>Advertisement</span></div>
+</div>
+<footer>© 2025 ToolsFlash</footer>
+<script>
+const words='lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum'.split(' ');
+function rw(){return words[Math.floor(Math.random()*words.length)];}
+function rs(n){let s=[];for(let i=0;i<n;i++)s.push(rw());return s[0].charAt(0).toUpperCase()+s.slice(0,1).join('')+s.slice(1).join(' ')+'.';}
+function rp(){let ss=[];for(let i=0;i<Math.floor(Math.random()*4)+3;i++)ss.push(rs(Math.floor(Math.random()*8)+8));return ss.join(' ');}
+function gen(){
+const type=document.getElementById('type').value,cnt=parseInt(document.getElementById('count').value)||3;
+let out=[];
+if(type==='paragraphs')for(let i=0;i<cnt;i++)out.push(rp());
+else if(type==='sentences')for(let i=0;i<cnt;i++)out.push(rs(Math.floor(Math.random()*8)+8));
+else{let ws=[];for(let i=0;i<cnt;i++)ws.push(rw());out.push(ws.join(' '));}
+document.getElementById('out').value=out.join('\n\n');
+}
+gen();
+</script>
+</body></html>
